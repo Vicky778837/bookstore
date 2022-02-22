@@ -1,0 +1,53 @@
+<p style="color: green"><%= notice %></p>
+
+<%=form_tag books_path,:method => 'get' do%>
+<%=text_field_tag :search,params[:search]%>
+<%=submit_tag "Search"%>
+<%end%>
+
+
+
+<h1>Books</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">name</th>
+      <th scope="col">category</th>
+      <th scope="col">prices</th>
+       <th scope="col">isbn</th>
+  
+
+    </tr>
+  </thead>
+  <tbody>
+    <% @books.each do |f| %>
+    <tr>
+      <th scope="row"><%=f.id%></th>
+      <td><%=f.name%></td>
+      <td><%=f.category%></td>
+      <td><%=f.price%></td>
+        <td><%=f.isbn%></td>
+
+          <td><%=link_to'show',f ,class:"btn btn-primary"%></td>
+             <td><%=link_to'edit',edit_book_path(f) ,class:"btn btn-secondary"%></td>
+
+              <td><%=link_to'delete',f ,data: {
+                turbo_method: :delete,
+                turbo_confirm: "Are you sure?"
+              },class:"btn btn-danger"%></td>
+
+
+
+    </tr>
+    
+     
+   
+  </tbody>
+    <% end %>
+</table>
+
+
+
+
+<%= link_to "New book", new_book_path ,class:"btn btn-primary"%>
